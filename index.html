@@ -25,6 +25,160 @@ button{font:inherit;cursor:pointer}.module,.tile,.choice,.secondary{border:1px s
 #feedback{text-align:center;color:#697386;font-size:13px;margin-top:10px}
 footer{font-size:12px;color:#697386;line-height:1.6;margin-top:16px}
 @media(min-width:650px){.modules{grid-template-columns:repeat(3,minmax(0,1fr))}.module:last-child{grid-column:auto}}@media(max-width:430px){body{padding:15px 10px}.modules{grid-template-columns:repeat(2,1fr)}}
+
+/* iOS-inspired glassmorphism refresh */
+:root{
+  color-scheme:light;
+  --ink:#18323a;
+  --muted:#607982;
+  --teal:#087f8c;
+  --glass:rgba(255,255,255,.58);
+  --glass-strong:rgba(255,255,255,.76);
+  --line:rgba(255,255,255,.78);
+  --shadow:0 12px 36px rgba(31,105,112,.12);
+}
+html{min-height:100%;background:#d9f3f1}
+body{
+  min-height:100vh;
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse at 8% 5%,rgba(123,224,213,.62),transparent 38%),
+    radial-gradient(ellipse at 92% 14%,rgba(151,201,255,.52),transparent 34%),
+    radial-gradient(ellipse at 55% 92%,rgba(188,226,255,.58),transparent 42%),
+    linear-gradient(145deg,#e8fbf7 0%,#dceefb 52%,#e8f5f7 100%);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+.app{max-width:900px}
+header{padding:8px 2px 14px}
+h1{letter-spacing:-.7px;color:#153b43}
+.sub,.muted{color:var(--muted)}
+.module,.tile,.choice,.secondary,.metric,.panel{
+  border:1px solid var(--line);
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(22px) saturate(165%);
+  backdrop-filter:blur(22px) saturate(165%);
+  box-shadow:var(--shadow);
+}
+.module{
+  border-radius:21px;
+  padding:16px;
+  min-height:145px;
+  transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.module:active,.tile:active,.choice:active,.primary:active,.secondary:active{transform:scale(.975)}
+.module.active{
+  border:1.5px solid rgba(8,145,162,.58);
+  background:rgba(224,255,251,.78);
+  box-shadow:0 10px 30px rgba(8,145,162,.16),inset 0 1px 0 rgba(255,255,255,.9);
+}
+.module b{color:#183d45}
+.metric,.panel{border-radius:21px}
+.metric{background:rgba(255,255,255,.54)}
+.metric strong{color:#145965}
+.panel{padding:17px}
+.panel h2{color:#183d45}
+.primary{
+  color:white;
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:15px;
+  padding:13px 18px;
+  background:linear-gradient(135deg,#12a9ae,#087f91);
+  box-shadow:0 8px 20px rgba(8,127,145,.22),inset 0 1px 0 rgba(255,255,255,.28);
+  font-weight:750;
+}
+.secondary{
+  color:#087985;
+  border-radius:14px;
+  padding:11px 15px;
+  font-weight:700;
+}
+.tile,.choice{
+  border-radius:15px;
+  color:#21434a;
+  min-height:48px;
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.tile:disabled{opacity:.42}
+.progress{height:8px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7)}
+.progress div{background:linear-gradient(90deg,#20b7b0,#1689c2);border-radius:20px}
+.difficulty-row{
+  padding:11px 13px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.8);
+  background:rgba(255,255,255,.48);
+  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+}
+.difficulty-row select{
+  color:#087985;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(8,145,162,.22);
+  border-radius:12px;
+  padding:10px 13px;
+  outline:none;
+}
+#stage{padding:8px 0}
+#feedback{color:#58727a}
+footer{color:#66818a}
+button{ -webkit-tap-highlight-color:transparent; }
+button:focus-visible,select:focus-visible{
+  outline:3px solid rgba(8,145,162,.32);
+  outline-offset:3px;
+}
+@media(max-width:430px){
+  body{padding:14px 11px}
+  h1{font-size:26px}
+  .module{min-height:150px;padding:13px;border-radius:19px}
+  .panel{padding:14px;border-radius:19px}
+  .stats{gap:7px}
+  .metric{padding:11px 9px;border-radius:16px}
+  .metric strong{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;scroll-behavior:auto!important}
+}
+
+
+/* iOS-like motion and tactile feedback */
+@keyframes page-enter{from{opacity:0;transform:translateY(12px) scale(.992);filter:blur(5px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes card-enter{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes soft-pulse{0%{box-shadow:0 0 0 0 rgba(8,145,162,.22)}100%{box-shadow:0 0 0 10px rgba(8,145,162,0)}}
+@keyframes tap-ripple{to{transform:scale(2.8);opacity:0}}
+@keyframes success-pop{0%{transform:scale(.96)}55%{transform:scale(1.035)}100%{transform:scale(1)}}
+#home,#trainingPage{animation:page-enter .42s cubic-bezier(.2,.75,.25,1) both}
+.module{animation:card-enter .45s cubic-bezier(.2,.75,.25,1) both}
+.module:nth-child(2){animation-delay:.035s}.module:nth-child(3){animation-delay:.07s}
+.module:nth-child(4){animation-delay:.105s}.module:nth-child(5){animation-delay:.14s}
+.module:nth-child(6){animation-delay:.175s}.module:nth-child(7){animation-delay:.21s}
+button,.module,.tile,.choice,.secondary,.primary{
+  position:relative;overflow:hidden;
+  transform:translateZ(0);
+  transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,background .2s ease;
+}
+button:active,.module:active,.tile:active,.choice:active,.secondary:active,.primary:active{
+  transform:scale(.965);
+  transition-duration:.08s;
+}
+button.tap-feedback::after{
+  content:"";position:absolute;width:18px;height:18px;border-radius:50%;
+  left:var(--tap-x,50%);top:var(--tap-y,50%);
+  background:rgba(255,255,255,.58);pointer-events:none;
+  transform:translate(-50%,-50%) scale(0);opacity:.8;
+  animation:tap-ripple .48s ease-out forwards;
+}
+.module.active{animation:success-pop .32s ease-out}
+.primary:focus-visible{animation:soft-pulse .65s ease-out}
+#stage>*{animation:card-enter .28s cubic-bezier(.2,.75,.25,1) both}
+.tile:disabled{animation:success-pop .2s ease-out}
+.metric,.panel{transition:box-shadow .25s ease,transform .25s ease}
+#feedback{transition:opacity .18s ease,transform .18s ease}
+#feedback.feedback-pop{animation:success-pop .25s ease-out}
+@media(prefers-reduced-motion:reduce){
+  #home,#trainingPage,.module,#stage>*,.tile:disabled,#feedback.feedback-pop{animation:none!important}
+  button,.module,.tile,.choice,.secondary,.primary,.metric,.panel{transition:none!important}
+}
+
 </style>
 </head>
 <body><main class="app">
@@ -99,6 +253,30 @@ $('modules').addEventListener('click',e=>{let b=e.target.closest('[data-mode]');
 function openModule(m){mode=m;$('home').hidden=true;$('trainingPage').hidden=false;$('pageLabel').textContent=names[m]+' · 独立训练';chooseMode(m);window.scrollTo({top:0,behavior:'smooth'})}
 function goHome(){stop();active=false;$('trainingPage').hidden=true;$('home').hidden=false;$('start').disabled=false;$('start').textContent='开始训练';$('stage').replaceChildren(panel('选择训练项目','返回首页后选择七大训练模块之一。'));$('status').textContent='训练模块已退出';$('feedback').textContent='你可以选择其他训练项目。';window.scrollTo({top:0,behavior:'smooth'})}
 $('difficulty').addEventListener('change',e=>{if(active){e.target.value=difficulty;return}difficulty=e.target.value;$('difficultyHint').textContent=level().hint;$('feedback').textContent='难度已切换为'+level().label+'，点击开始应用新难度。'});
+
+  // Tap feedback: visual ripple everywhere; hardware vibration only where supported.
+  document.addEventListener('pointerdown',e=>{
+    const target=e.target.closest('button');
+    if(!target || target.disabled) return;
+    const rect=target.getBoundingClientRect();
+    target.style.setProperty('--tap-x',(e.clientX-rect.left)+'px');
+    target.style.setProperty('--tap-y',(e.clientY-rect.top)+'px');
+    target.classList.remove('tap-feedback');
+    void target.offsetWidth;
+    target.classList.add('tap-feedback');
+    if(typeof navigator!=='undefined' && typeof navigator.vibrate==='function'){
+      try{navigator.vibrate(10)}catch(_){}
+    }
+  },{passive:true});
+  document.addEventListener('animationend',e=>{
+    if(e.animationName==='tap-ripple') e.target.classList.remove('tap-feedback');
+  });
+  const feedbackObserver=new MutationObserver(()=>{
+    const f=$('feedback');
+    if(f){f.classList.remove('feedback-pop');void f.offsetWidth;f.classList.add('feedback-pop')}
+  });
+  if($('feedback')) feedbackObserver.observe($('feedback'),{childList:true,characterData:true,subtree:true});
+
  $('homeBtn').addEventListener('click',goHome);$('start').addEventListener('click',start);$('restart').addEventListener('click',()=>chooseMode(mode));$('clear').addEventListener('click',()=>{if(confirm('确定清空全部训练记录吗？')){history=[];save();renderHistory()}});
 try{history=JSON.parse(localStorage.getItem('brainTrainingHistory')||'[]')}catch(e){history=[]}
 save();renderHistory();$('heading').textContent='选择训练项目';$('instruction').textContent='首页包含七个独立训练入口。选择任意一项开始训练。';$('stage').replaceChildren(panel('七大训练已就绪','请从首页选择一个训练项目。'));$('trainingPage').hidden=true;$('home').hidden=false;
