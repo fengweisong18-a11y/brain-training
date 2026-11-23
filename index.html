@@ -179,19 +179,181 @@ button.tap-feedback::after{
   button,.module,.tile,.choice,.secondary,.primary,.metric,.panel{transition:none!important}
 }
 
+
+/* Premium editorial interface: restrained typography, whitespace and glass surfaces */
+:root{
+  --ink:#102f35;
+  --muted:#667d81;
+  --teal:#087f83;
+  --line:rgba(20,76,80,.10);
+  --shadow:0 14px 38px rgba(25,79,83,.075);
+}
+html{min-height:100%;background:#edf5f3}
+body{
+  min-height:100vh;
+  padding:clamp(22px,5vw,54px) 16px 36px;
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse at 10% 0%,rgba(158,224,211,.38),transparent 37%),
+    radial-gradient(ellipse at 92% 12%,rgba(186,216,235,.34),transparent 34%),
+    linear-gradient(150deg,#f4f8f6 0%,#eaf2f1 54%,#eff5f6 100%);
+  background-attachment:fixed;
+}
+.app{max-width:980px}
+header{
+  align-items:flex-end;
+  padding:18px 4px 30px;
+  margin-bottom:24px;
+  border-bottom:1px solid rgba(22,73,77,.12);
+}
+.brand-block{min-width:0}
+.eyebrow{
+  margin-bottom:14px;
+  color:#6b8589;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.19em;
+}
+h1{
+  margin:0;
+  color:#102f35;
+  font-size:clamp(44px,9vw,68px);
+  line-height:1.02;
+  letter-spacing:-.075em;
+  font-weight:850;
+}
+.title-mark{color:#0b9b98}
+.hero-copy{
+  margin-top:15px;
+  color:#647d81;
+  font-size:14px;
+  letter-spacing:.08em;
+}
+header>div:last-child{
+  min-width:108px;
+  padding:13px 16px;
+  border:1px solid rgba(255,255,255,.82);
+  border-radius:19px;
+  background:rgba(255,255,255,.50);
+  -webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(20px);
+  box-shadow:0 8px 24px rgba(25,79,83,.05);
+}
+#totalDone{
+  color:#116c70;
+  font-size:29px!important;
+  letter-spacing:-.05em;
+}
+.modules{gap:14px;margin:0 0 19px}
+.module{
+  min-height:166px;
+  padding:19px 18px 17px;
+  border:1px solid rgba(255,255,255,.90);
+  border-radius:22px;
+  background:rgba(255,255,255,.62);
+  box-shadow:0 8px 26px rgba(29,76,80,.055),inset 0 1px 0 rgba(255,255,255,.85);
+  -webkit-backdrop-filter:blur(22px) saturate(150%);
+  backdrop-filter:blur(22px) saturate(150%);
+  text-align:left;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease;
+}
+.module::before{
+  content:attr(data-mode);
+  display:block;
+  margin-bottom:19px;
+  color:#0b9692;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+.module b{
+  display:block;
+  margin:0 0 9px;
+  color:#173b40;
+  font-size:16px;
+  line-height:1.4;
+  letter-spacing:-.025em;
+  font-weight:780;
+}
+.module .muted{
+  display:block;
+  color:#6a8084;
+  font-size:12px;
+  line-height:1.7;
+}
+.module span[style*="margin-top"]{
+  margin-top:auto!important;
+  padding-top:15px;
+  color:#087f83!important;
+  font-size:11px!important;
+  letter-spacing:.05em;
+}
+.module.active{
+  border:1px solid rgba(8,145,145,.48);
+  background:rgba(230,250,246,.88);
+  box-shadow:0 12px 30px rgba(8,127,131,.12),inset 0 1px 0 #fff;
+}
+.module:active{transform:translateY(1px) scale(.985)}
+.panel,.metric{
+  border:1px solid rgba(255,255,255,.88);
+  border-radius:22px;
+  background:rgba(255,255,255,.64);
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.82);
+}
+.panel{padding:22px}
+.panel h2{
+  margin-bottom:12px;
+  color:#173b40;
+  font-size:18px;
+  font-weight:780;
+  letter-spacing:-.025em;
+}
+.stats{gap:11px}
+.metric{padding:15px 16px}
+.metric small{color:#71878b;font-size:11px;letter-spacing:.035em}
+.metric strong{color:#145d63;font-size:25px;letter-spacing:-.045em}
+.primary{
+  border-radius:14px;
+  background:linear-gradient(135deg,#0d9995,#08747e);
+  box-shadow:0 8px 20px rgba(8,127,131,.18);
+}
+.secondary{border-radius:14px}
+#stage{min-height:180px}
+footer{
+  margin-top:23px;
+  padding:16px 4px 0;
+  border-top:1px solid rgba(22,73,77,.10);
+  color:#819396;
+  font-size:11px;
+  line-height:1.8;
+}
+@media(max-width:650px){
+  header{align-items:flex-start;padding:10px 2px 23px}
+  header>div:last-child{min-width:78px;padding:10px 11px}
+  .hero-copy{max-width:260px;font-size:12px;line-height:1.7}
+  .module{min-height:160px;padding:16px 14px;border-radius:19px}
+  .module::before{margin-bottom:16px}
+  .module b{font-size:14px}
+  .module .muted{font-size:11px}
+  .panel{padding:17px}
+}
+@media(prefers-reduced-motion:reduce){
+  .module,.panel,.metric{transition:none!important}
+}
+
 </style>
 </head>
 <body><main class="app">
-<header><div><div class="sub">COGNITIVE TRAINING SYSTEM</div><h1>🧠 大脑训练</h1><div class="sub">七大认知能力训练中心</div></div><div style="text-align:right"><div class="sub">累计完成</div><strong id="totalDone" style="font-size:25px">0</strong><div class="sub">次训练</div></div></header>
+<header><div class="brand-block"><div class="eyebrow">COGNITIVE PERFORMANCE&nbsp; / &nbsp;TRAINING SYSTEM</div><h1>大脑训练<span class="title-mark">.</span></h1><div class="hero-copy">专注力 · 记忆力 · 认知控制</div></div><div style="text-align:right"><div class="sub">累计完成</div><strong id="totalDone" style="font-size:25px">0</strong><div class="sub">次训练</div></div></header>
 <section id="home">
 <div class="modules" id="modules">
-<button class="module" data-mode="0"><div class="ico">🔢</div><b>01 · 舒尔特表</b><span class="muted">按顺序寻找数字，训练视觉搜索与注意力。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
-<button class="module" data-mode="1"><div class="ico">🎨</div><b>02 · Stroop训练</b><span class="muted">忽略文字含义，识别字体颜色，训练抑制控制。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
-<button class="module" data-mode="2"><div class="ico">🧠</div><b>03 · 序列工作记忆训练</b><span class="muted">记住数字序列并按原顺序复现。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
-<button class="module" data-mode="3"><div class="ico">🔊</div><b>04 · 听觉选择性注意训练</b><span class="muted">聆听声音序列，数出高音目标。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
-<button class="module" data-mode="4"><div class="ico">🤲</div><b>05 · 双侧肢体镜像训练</b><span class="muted">观察左侧位置，在右侧选择镜像位置。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
-<button class="module" data-mode="5"><div class="ico">🔍</div><b>06 · 规则导向分类逻辑训练</b><span class="muted">根据当前规则判断数字是否符合条件。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
-<button class="module" data-mode="6"><div class="ico">🗺️</div><b>07 · 情景联想记忆训练</b><span class="muted">记住情景与物品的配对，再完成回忆。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
+<button class="module" data-mode="01"><b>01 · 舒尔特表</b><span class="muted">按顺序寻找数字，训练视觉搜索与注意力。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
+<button class="module" data-mode="02"><b>02 · Stroop训练</b><span class="muted">忽略文字含义，识别字体颜色，训练抑制控制。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
+<button class="module" data-mode="03"><b>03 · 序列工作记忆训练</b><span class="muted">记住数字序列并按原顺序复现。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
+<button class="module" data-mode="04"><b>04 · 听觉选择性注意训练</b><span class="muted">聆听声音序列，数出高音目标。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
+<button class="module" data-mode="05"><b>05 · 双侧肢体镜像训练</b><span class="muted">观察左侧位置，在右侧选择镜像位置。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
+<button class="module" data-mode="06"><b>06 · 规则导向分类逻辑训练</b><span class="muted">根据当前规则判断数字是否符合条件。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
+<button class="module" data-mode="07"><b>07 · 情景联想记忆训练</b><span class="muted">记住情景与物品的配对，再完成回忆。</span><span style="display:block;margin-top:9px;color:#087985;font-size:12px;font-weight:700">进入训练 →</span></button>
 </div>
 <div class="panel"><h2>训练中心</h2><div class="muted">选择一个训练项目，进入独立训练页面。每个项目都有自己的训练说明、计时、成绩评估和返回首页入口。</div></div>
 </section>
